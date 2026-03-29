@@ -9,34 +9,121 @@
 
 <header>
   <h1>UrbanStyle</h1>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="produtos.html">Produtos</a>
+    <a href="carrinho.html">Carrinho</a>
+  </nav>
 </header>
 
-<section class="produtos">
+<main>
+  <section class="slider">
+    <div class="produtos" id="produtos">
 
-  <div class="produto">
-    <h3>Camiseta Oversized</h3>
-    <p>R$ 79.90</p>
-    <button onclick="addCarrinho('Camiseta Oversized', 79.90)">
-      Adicionar
-    </button>
+      <div class="produto">
+        <h3>Camiseta Oversized</h3>
+        <p>R$ 79.90</p>
+        <button onclick="addCarrinho('Camiseta Oversized', 79.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Calça Cargo</h3>
+        <p>R$ 149.90</p>
+        <button onclick="addCarrinho('Calça Cargo', 149.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Moletom Street</h3>
+        <p>R$ 199.90</p>
+        <button onclick="addCarrinho('Moletom Street', 199.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Jaqueta Jeans</h3>
+        <p>R$ 219.90</p>
+        <button onclick="addCarrinho('Jaqueta Jeans', 219.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Tênis Canvas</h3>
+        <p>R$ 189.90</p>
+        <button onclick="addCarrinho('Tênis Canvas', 189.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Boné Urbano</h3>
+        <p>R$ 49.90</p>
+        <button onclick="addCarrinho('Boné Urbano', 49.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Meia Skate</h3>
+        <p>R$ 19.90</p>
+        <button onclick="addCarrinho('Meia Skate', 19.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Bolsa Tote</h3>
+        <p>R$ 129.90</p>
+        <button onclick="addCarrinho('Bolsa Tote', 129.90)">Adicionar</button>
+      </div>
+
+      <div class="produto">
+        <h3>Relógio Minimalista</h3>
+        <p>R$ 249.90</p>
+        <button onclick="addCarrinho('Relógio Minimalista', 249.90)">Adicionar</button>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<section class="cover-section">
+  <div class="cover-inner">
+    <div class="cover-text">
+      <span>Nova edição</span>
+      <h2>Estilo urbano que vai com você</h2>
+      <p>Encontre peças selecionadas para montar looks modernos e confortáveis. Descubra camisetas, jaquetas e acessórios com design exclusivo.</p>
+      <a class="btn" href="produtos.html">Ver coleção</a>
+    </div>
+    <div class="cover-image">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect width='800' height='600' fill='%23333333'/%3E%3Ccircle cx='560' cy='320' r='210' fill='%23666666'/%3E%3Cpath d='M220 180c0-30 45-55 100-55s100 25 100 55v205c0 30-45 55-100 55s-100-25-100-55V180z' fill='%23bbbbbb'/%3E%3Cpath d='M330 380c0 25-15 45-35 45s-35-20-35-45 15-45 35-45 35 20 35 45z' fill='%23333333'/%3E%3Ctext x='50%25' y='87%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial, sans-serif'%3EModelo%3C/text%3E%3C/svg%3E" alt="Modelo usando a coleção"></img>
+    </div>
   </div>
+</section>
 
-  <div class="produto">
-    <h3>Calça Cargo</h3>
-    <p>R$ 149.90</p>
-    <button onclick="addCarrinho('Calça Cargo', 149.90)">
-      Adicionar
-    </button>
+<section class="featured-models">
+  <div class="featured-inner">
+    <div class="featured-card">
+      <span>Look rápido</span>
+      <h3>Camiseta premium</h3>
+      <p>Visual prático e descolado para o dia a dia.</p>
+    </div>
+    <div class="featured-card">
+      <span>Essencial</span>
+      <h3>Calça cargo</h3>
+      <p>Conforto urbano com bolsos e caimento ajustado.</p>
+    </div>
+    <div class="featured-card">
+      <span>Top escolha</span>
+      <h3>Boné street</h3>
+      <p>Acabamento premium para completar qualquer look.</p>
+    </div>
   </div>
+</section>
 
-  <div class="produto">
-    <h3>Moletom Street</h3>
-    <p>R$ 199.90</p>
-    <button onclick="addCarrinho('Moletom Street', 199.90)">
-      Adicionar
-    </button>
+<section class="model-section">
+  <div class="model-inner">
+    <div class="model-copy reveal">
+      <span>Look em destaque</span>
+      <h2>Movimento, atitude e design</h2>
+      <p>Role a página e veja o modelo aparecer com uma animação suave, mostrando o visual urbano perfeito para o dia a dia.</p>
+      <a class="btn" href="produtos.html">Conhecer look</a>
+    </div>
+    <div class="model-image reveal">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 900 700'%3E%3Crect width='900' height='700' fill='%23000000'/%3E%3Cellipse cx='620' cy='360' rx='230' ry='260' fill='%23666666'/%3E%3Cpath d='M310 210c0-35 55-65 125-65s125 30 125 65v250c0 35-55 65-125 65s-125-30-125-65V210z' fill='%23bbbbbb'/%3E%3Cpath d='M380 430c0 30-18 55-42 55s-42-25-42-55 18-55 42-55 42 25 42 55z' fill='%23000000'/%3E%3Ctext x='50%25' y='84%25' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='%23ffffff' font-family='Arial, sans-serif'%3EModelo%3C/text%3E%3C/svg%3E" alt="Modelo em destaque"></img>
+    </div>
   </div>
-
 </section>
 
 <script src="js/script.js"></script>

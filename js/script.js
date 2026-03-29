@@ -3,47 +3,113 @@ let carrinho = JSON.parse(localStorage.getItem("carrinho")) || []
 function addCarrinho(nome, preco) {
   carrinho.push({ nome, preco })
   localStorage.setItem("carrinho", JSON.stringify(carrinho))
-
   alert("Produto adicionado! 🛒")
 }
 
-// renderiza carrinho
-function renderCarrinho() {
-  const lista = document.getElementById("lista-carrinho")
-  const totalEl = document.getElementById("total")
+/* =========================
+   CARROSSEL INFINITO MANUAL
+========================= */
 
-  if (!lista) return
+function initInfiniteScroll() {
+  const container = document.getElementById("produtos")
+  if (!container) return
 
-  lista.innerHTML = ""
-  let total = 0
+  const items = Array.from(container.children)
+  const gap = 20
+  const itemWidth = items[0].offsetWidth + gap
 
-  carrinho.forEach((item, index) => {
-    total += item.preco
-
-    lista.innerHTML += `
-      <li>
-        ${item.nome} - R$ ${item.preco.toFixed(2)}
-        <button onclick="removerItem(${index})">Remover</button>
-      </li>
-    `
+  // duplica itens
+  items.forEach(item => {
+    container.appendChild(item.cloneNode(true))
   })
 
-  totalEl.innerText = "Total: R$ " + total.toFixed(2)
+  items.slice().reverse().forEach(item => {
+    container.insertBefore(item.cloneNode(true), container.firstChild)
+  })
+
+  // começa no meio
+  container.scrollLeft = container.scrollWidth / 3
+
+  let isJumping = false
+
+  container.addEventListener("scroll", () => {
+    if (isJumping) return
+
+    const maxScroll = container.scrollWidth
+
+    if (container.scrollLeft < itemWidth) {
+      isJumping = true
+      container.scrollLeft += items.length * itemWidth
+      requestAnimationFrame(() => isJumping = false)
+    }
+
+    if (container.scrollLeft > maxScroll - items.length * itemWidth) {
+      isJumping = true
+      container.scrollLeft -= items.length * itemWidth
+      requestAnimationFrame(() => isJumping = false)
+    }
+  })
 }
 
-// remover item
-function removerItem(index) {
-  carrinho.splice(index, 1)
-  localStorage.setItem("carrinho", JSON.stringify(carrinho))
-  renderCarrinho()
+/* =========================
+   DRAG COM MOUSE (EXTRA TOP)
+========================= */
+
+function enableDragScroll() {
+  const container = document.getElementById("produtos")
+  if (!container) return
+
+  let isDown = false
+  let startX
+  let scrollLeft
+
+  container.addEventListener("mousedown", (e) => {
+    isDown = true
+    startX = e.pageX - container.offsetLeft
+    scrollLeft = container.scrollLeft
+  })
+
+  container.addEventListener("mouseleave", () => {
+    isDown = false
+  })
+
+  container.addEventListener("mouseup", () => {
+    isDown = false
+  })
+
+  container.addEventListener("mousemove", (e) => {
+    if (!isDown) return
+    e.preventDefault()
+
+    const x = e.pageX - container.offsetLeft
+    const walk = (x - startX) * 2
+    container.scrollLeft = scrollLeft - walk
+  })
 }
 
-// limpar carrinho
-function limparCarrinho() {
-  carrinho = []
-  localStorage.setItem("carrinho", JSON.stringify(carrinho))
-  renderCarrinho()
+function initScrollReveal() {
+  const revealItems = document.querySelectorAll('.reveal')
+  if (!revealItems.length) return
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible')
+      }
+    })
+  }, {
+    threshold: 0.25
+  })
+
+  revealItems.forEach(item => observer.observe(item))
 }
 
-// executa ao abrir página
-renderCarrinho()
+/* =========================
+   INIT
+========================= */
+
+window.addEventListener("load", () => {
+  initInfiniteScroll()
+  enableDragScroll()
+  initScrollReveal()
+})
