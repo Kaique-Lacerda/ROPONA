@@ -113,3 +113,114 @@ window.addEventListener("load", () => {
   enableDragScroll()
   initScrollReveal()
 })
+
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+gabriel rsrsrsrsrsrs
+
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || []
+
+function addCarrinho(nome, preco, img) {
+  carrinho.push({ nome, preco, img })
+  localStorage.setItem("carrinho", JSON.stringify(carrinho))
+
+  alert("Produto adicionado! 🛒")
+}
+
+// renderiza carrinho
+function renderCarrinho() {
+  const lista = document.getElementById("lista-carrinho")
+  const totalEl = document.getElementById("total")
+
+  if (!lista) return
+
+  lista.innerHTML = ""
+  let total = 0
+
+  carrinho.forEach((item, index) => {
+    total += item.preco
+
+    lista.innerHTML += `
+      <li>
+        <input type="checkbox" class="item-checkbox" data-index="${index}" onchange="updateAcoes()">
+        ${item.img ? `<img src="${item.img}" alt="${item.nome}" style="width: 50px; height: 50px; object-fit: cover; margin-right: 10px;">` : ''}
+        <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
+        <button onclick="removerItem(${index})">Remover</button>
+      </li>
+    `
+  })
+
+  totalEl.innerText = "Total: R$ " + total.toFixed(2)
+}
+
+// remover item
+function removerItem(index) {
+  carrinho.splice(index, 1)
+  localStorage.setItem("carrinho", JSON.stringify(carrinho))
+  renderCarrinho()
+}
+
+// remover selecionados
+function removerSelecionados() {
+  const checkboxes = document.querySelectorAll('.item-checkbox:checked')
+  const indices = Array.from(checkboxes).map(cb => parseInt(cb.dataset.index)).sort((a, b) => b - a)
+  indices.forEach(index => carrinho.splice(index, 1))
+  localStorage.setItem("carrinho", JSON.stringify(carrinho))
+  renderCarrinho()
+}
+
+// limpar carrinho
+function limparCarrinho() {
+  carrinho = []
+  localStorage.setItem("carrinho", JSON.stringify(carrinho))
+  renderCarrinho()
+}
+
+// comprar todos
+function comprarTodos() {
+  if (carrinho.length === 0) {
+    alert("Carrinho vazio!")
+    return
+  }
+  alert("Compra de todos os itens realizada! Total: R$ " + carrinho.reduce((sum, item) => sum + item.preco, 0).toFixed(2))
+  limparCarrinho()
+}
+
+// comprar selecionados
+function comprarSelecionados() {
+  const checkboxes = document.querySelectorAll('.item-checkbox:checked')
+  if (checkboxes.length === 0) {
+    alert("Nenhum item selecionado!")
+    return
+  }
+  const selectedItems = Array.from(checkboxes).map(cb => carrinho[parseInt(cb.dataset.index)])
+  const total = selectedItems.reduce((sum, item) => sum + item.preco, 0)
+  alert("Compra dos itens selecionados realizada! Total: R$ " + total.toFixed(2))
+  removerSelecionados()
+}
+
+// update acoes
+function updateAcoes() {
+  const checkedBoxes = document.querySelectorAll('.item-checkbox:checked')
+  const selectedItems = Array.from(checkedBoxes).map(cb => carrinho[parseInt(cb.dataset.index)])
+  const total = selectedItems.reduce((sum, item) => sum + item.preco, 0)
+  document.getElementById('total-selecionados').innerText = `Total: R$ ${total.toFixed(2)}`
+  document.getElementById('sidebar').style.display = checkedBoxes.length > 0 ? 'block' : 'none'
+}
+
+// executa ao abrir página
+renderCarrinho()
