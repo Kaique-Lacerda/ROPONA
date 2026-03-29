@@ -29,37 +29,63 @@ function initInfiniteScroll() {
   const items = Array.from(container.children)
   if (items.length === 0) return
 
-  const gap = 20
-  const itemWidth = items[0].offsetWidth + gap
+  // duplicar itens 3 vezes (total 4 conjuntos)
+  for (let i = 0; i < 3; i++) {
+    items.forEach(item => {
+      container.appendChild(item.cloneNode(true))
+    })
+  }
 
-  // duplicar itens
-  items.forEach(item => {
-    container.appendChild(item.cloneNode(true))
-  })
-
-  items.slice().reverse().forEach(item => {
-    container.insertBefore(item.cloneNode(true), container.firstChild)
-  })
-
-  container.scrollLeft = container.scrollWidth / 3
+  container.scrollLeft = container.scrollWidth / 4
 
   let isJumping = false
+  let autoScroll = setInterval(() => {
+    if (!isJumping) {
+      container.scrollLeft += 1;
+    }
+  }, 50);
 
   container.addEventListener("scroll", () => {
     if (isJumping) return
 
     const maxScroll = container.scrollWidth
 
-    if (container.scrollLeft < itemWidth) {
+    if (container.scrollLeft > maxScroll * 0.75) {
       isJumping = true
-      container.scrollLeft += items.length * itemWidth
+      container.scrollLeft = maxScroll * 0.25
       requestAnimationFrame(() => isJumping = false)
     }
 
-    if (container.scrollLeft > maxScroll - items.length * itemWidth) {
+    if (container.scrollLeft < maxScroll * 0.25) {
       isJumping = true
-      container.scrollLeft -= items.length * itemWidth
+      container.scrollLeft = maxScroll * 0.75 - container.clientWidth
       requestAnimationFrame(() => isJumping = false)
+    }
+  })
+
+  // pausar auto-scroll durante drag
+  container.addEventListener("mousedown", () => {
+    clearInterval(autoScroll)
+    autoScroll = null
+  })
+
+  container.addEventListener("mouseup", () => {
+    if (!autoScroll) {
+      autoScroll = setInterval(() => {
+        if (!isJumping) {
+          container.scrollLeft += 1;
+        }
+      }, 50);
+    }
+  })
+
+  container.addEventListener("mouseleave", () => {
+    if (!autoScroll) {
+      autoScroll = setInterval(() => {
+        if (!isJumping) {
+          container.scrollLeft += 1;
+        }
+      }, 50);
     }
   })
 }
