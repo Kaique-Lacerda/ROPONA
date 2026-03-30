@@ -10,6 +10,12 @@ body {
 /* =========================
    HEADER
 ========================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
 header {
   background: linear-gradient(to bottom, #000 77%, transparent);
   color: white;
@@ -81,6 +87,10 @@ nav a {
 /* =========================
    SLIDER PRODUTOS
 ========================= */
+.produto-section {
+  margin: 40px auto;
+}
+
 .slider {
   overflow: hidden;
   padding: 40px 0 35px;
@@ -179,9 +189,10 @@ nav a {
   cursor: pointer;
 }
 .produto-detalhe{
-  display: flex
-  
+  display: flex;
+  justify-content: center;
 }
+
 .produto-imagem{
   width: 300px;
   height: 300px;
@@ -357,11 +368,20 @@ nav a {
   z-index: -1;
   filter: blur(40px);
 }
-.moletons-banner{
-  background-color: #000;
+
+.moletons-banner {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background: #0a0f14;
+  border-radius: 0;
 }
-.moletons-banner img{
-  width: 100px;
+
+.moletons-banner img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  display: block;
 }
 
 /* =========================
@@ -416,7 +436,7 @@ nav a {
 /* =========================
    CARRINHO
 ========================= */
-section {
+.carrinho-section {
   max-width: 1000px;
   margin: 20px auto;
   padding: 20px;
@@ -426,7 +446,6 @@ section {
   display: flex;
   gap: 20px;
 }
-
 #lista-container {
   flex: 1;
 }
