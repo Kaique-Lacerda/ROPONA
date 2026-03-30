@@ -104,7 +104,93 @@ nav a {
   border-radius: 8px;
   cursor: pointer;
 }
+.produto-detalhe{
+  display: flex
+  
+}
+.produto-imagem{
+  width: 300px;
+  height: 300px;
+}
+/* =========================
+   PRODUTO DETALHE (UPGRADE)
+========================= */
 
+.produto-detalhe {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  padding: 40px;
+}
+
+.produto-img-box {
+  flex: 1;
+  background: #fff;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.produto-img-box img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.produto-img-box img:hover {
+  transform: scale(1.05);
+}
+
+.produto-info {
+  flex: 1;
+}
+
+.produto-info h1 {
+  margin: 10px 0;
+  font-size: 2rem;
+}
+
+.categoria {
+  font-size: 0.9rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.descricao {
+  margin: 15px 0;
+  color: #444;
+}
+
+.preco-area {
+  margin: 20px 0;
+}
+
+.preco {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* loading e erro */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.erro {
+  text-align: center;
+  color: red;
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .produto-detalhe {
+    flex-direction: column;
+    text-align: center;
+  }
+}
 /* =========================
    COVER SECTION
 ========================= */
