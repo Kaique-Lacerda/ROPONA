@@ -10,34 +10,13 @@ function salvarCarrinho() {
 /* =========================
    ADICIONAR AO CARRINHO
 ========================= */
-function showNotification(message, duration = 2200) {
-  let toast = document.getElementById('toast')
-  if (!toast) {
-    toast = document.createElement('div')
-    toast.id = 'toast'
-    toast.className = 'toast'
-    document.body.appendChild(toast)
-  }
-
-  toast.innerText = message
-  toast.classList.add('show')
-  clearTimeout(window.toastTimeout)
-  window.toastTimeout = setTimeout(() => toast.classList.remove('show'), duration)
-}
-
-function addCarrinho(nome, preco, img = null, notify = true) {
+function addCarrinho(nome, preco, img = null) {
   carrinho.push({ nome, preco, img })
   salvarCarrinho()
 
+  // feedback melhor que alert (mais moderno)
   console.log("Produto adicionado:", nome)
-  if (notify) {
-    showNotification("Produto adicionado ao carrinho! 🛒")
-  }
-}
-
-function comprarAgora(nome, preco, img = null) {
-  addCarrinho(nome, preco, img, false)
-  showNotification(`Compra iniciada! ${nome} adicionado ao carrinho.`)
+  alert("Produto adicionado ao carrinho! 🛒")
 }
 
 /* =========================
@@ -50,8 +29,6 @@ function initInfiniteScroll() {
   const items = Array.from(container.children)
   if (items.length === 0) return
 
-  container.style.visibility = 'hidden'
-
   // duplicar itens 3 vezes (total 4 conjuntos)
   for (let i = 0; i < 3; i++) {
     items.forEach(item => {
@@ -60,9 +37,6 @@ function initInfiniteScroll() {
   }
 
   container.scrollLeft = container.scrollWidth / 4
-  requestAnimationFrame(() => {
-    container.style.visibility = 'visible'
-  })
 
   let isJumping = false
   let isPaused = false;
@@ -164,7 +138,7 @@ function renderCarrinho() {
 
         <span>${item.nome} - R$ ${item.preco.toFixed(2)}</span>
 
-        <button onclick="removerItem(${index})">Tirar do carrinho</button>
+        <button onclick="removerItem(${index})">Remover</button>
       </li>
     `
   })
@@ -271,15 +245,11 @@ function loadProdutos() {
 
       produtos.forEach(produto => {
         const produtoDiv = document.createElement('div');
-        produtoDiv.className = 'produto produto-venda';
+        produtoDiv.className = 'produto';
         produtoDiv.innerHTML = `
-          <span class="badge">Oferta</span>
           <h3>${produto.nome}</h3>
-          <p class="preco">R$ ${produto.preco.toFixed(2)}</p>
-          <div class="produto-buttons">
-            <button class="btn btn-add" onclick="event.stopPropagation(); addCarrinho('${produto.nome}', ${produto.preco}, '${produto.imagem}')">Adicionar ao carrinho</button>
-            <button class="btn btn-buy" onclick="event.stopPropagation(); comprarAgora('${produto.nome}', ${produto.preco}, '${produto.imagem}')">Comprar agora</button>
-          </div>
+          <p>R$ ${produto.preco.toFixed(2)}</p>
+          <button onclick="addCarrinho('${produto.nome}', ${produto.preco}, '${produto.imagem}')">Adicionar</button>
         `;
         produtoDiv.style.cursor = 'pointer';
         produtoDiv.onclick = (e) => {
