@@ -39,54 +39,24 @@ function initInfiniteScroll() {
   container.scrollLeft = container.scrollWidth / 4
 
   let isJumping = false
+  let isPaused = false;
+
   let autoScroll = setInterval(() => {
-    if (!isJumping) {
+    if (!isPaused && !isJumping) {
       container.scrollLeft += 1;
     }
   }, 50);
 
-  container.addEventListener("scroll", () => {
-    if (isJumping) return
-
-    const maxScroll = container.scrollWidth
-
-    if (container.scrollLeft > maxScroll * 0.75) {
-      isJumping = true
-      container.scrollLeft = maxScroll * 0.25
-      requestAnimationFrame(() => isJumping = false)
-    }
-
-    if (container.scrollLeft < maxScroll * 0.25) {
-      isJumping = true
-      container.scrollLeft = maxScroll * 0.75 - container.clientWidth
-      requestAnimationFrame(() => isJumping = false)
-    }
-  })
-
-  // pausar auto-scroll durante drag
   container.addEventListener("mousedown", () => {
-    clearInterval(autoScroll)
-    autoScroll = null
+    isPaused = true;
   })
 
   container.addEventListener("mouseup", () => {
-    if (!autoScroll) {
-      autoScroll = setInterval(() => {
-        if (!isJumping) {
-          container.scrollLeft += 1;
-        }
-      }, 50);
-    }
+    isPaused = false;
   })
 
   container.addEventListener("mouseleave", () => {
-    if (!autoScroll) {
-      autoScroll = setInterval(() => {
-        if (!isJumping) {
-          container.scrollLeft += 1;
-        }
-      }, 50);
-    }
+    isPaused = false;
   })
 }
 
