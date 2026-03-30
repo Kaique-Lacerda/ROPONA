@@ -3,7 +3,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const id = urlParams.get('id');
 
 // Configuração da API
-const API_BASE_URL = 'https://ropona.vercel.app/api/produtos';
+const API_BASE_URL = 'https://ropona.vercel.app/api';
 
 if (id) {
   // Fazer fetch para obter detalhes do produto
