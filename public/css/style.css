@@ -266,11 +266,14 @@ nav a {
 /* =========================
    COVER SECTION
 ========================= */
+/* =========================
+   COVER SECTION (UPGRADE)
+========================= */
 .cover-section {
   width: 100%;
-  background: #111;
+  background: radial-gradient(circle at 70% 30%, #1a1a1a, #000);
   color: white;
-  padding: 90px 20px;
+  padding: 100px 20px;
 }
 
 .cover-inner {
@@ -278,26 +281,83 @@ nav a {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  gap: 60px;
   align-items: center;
+}
+
+.cover-text {
+  max-width: 480px;
 }
 
 .cover-text span {
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  opacity: 0.8;
-  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+  font-size: 0.75rem;
 }
 
 .cover-text h2 {
   margin: 20px 0;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+
+  background: linear-gradient(90deg, #fff, #aaa);
+
+  /* compatibilidade */
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
 }
 
 .cover-text p {
-  color: rgba(255,255,255,0.85);
+  color: rgba(255,255,255,0.75);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 25px;
 }
 
+/* botão mais estiloso */
+.cover-text .btn {
+  background: white;
+  color: black;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.cover-text .btn:hover {
+  background: #ddd;
+  transform: scale(1.05);
+}
+
+/* imagem mais integrada */
+.cover-image {
+  position: relative;
+}
+
+.cover-image img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 16px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* glow leve atrás da imagem */
+.cover-image::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08), transparent);
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  filter: blur(40px);
+}
 /* =========================
    FEATURED
 ========================= */
