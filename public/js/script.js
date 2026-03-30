@@ -231,6 +231,39 @@ function comprarSelecionados() {
 }
 
 /* =========================
+   EVENT DELEGATION PARA CLONES
+========================= */
+document.addEventListener("click", (e) => {
+  // Detectar cliques em botões dentro de produtos (originais ou clonados)
+  const addBtn = e.target.closest(".btn-add");
+  const buyBtn = e.target.closest(".btn-buy");
+  
+  if (addBtn) {
+    e.stopPropagation();
+    // Extrair dados do produto do DOM
+    const produtoDiv = e.target.closest(".produto-venda");
+    if (produtoDiv) {
+      const nome = produtoDiv.querySelector("h3").textContent;
+      const preco = parseFloat(produtoDiv.querySelector(".preco").textContent.replace("R$ ", ""));
+      const img = produtoDiv.querySelector("img")?.src || null;
+      addCarrinho(nome, preco, img);
+    }
+  }
+  
+  if (buyBtn) {
+    e.stopPropagation();
+    // Extrair dados do produto do DOM
+    const produtoDiv = e.target.closest(".produto-venda");
+    if (produtoDiv) {
+      const nome = produtoDiv.querySelector("h3").textContent;
+      const preco = parseFloat(produtoDiv.querySelector(".preco").textContent.replace("R$ ", ""));
+      const img = produtoDiv.querySelector("img")?.src || null;
+      comprarAgora(nome, preco, img);
+    }
+  }
+});
+
+/* =========================
    INICIALIZAÇÃO
 ========================= */
 document.addEventListener("DOMContentLoaded", () => {
@@ -260,6 +293,15 @@ function updateAcoes() {
 const API_BASE_URL = 'https://ropona.vercel.app/api';
 
 /* =========================
+   NAVEGAR PARA PRODUTO
+========================= */
+function abrirProduto(produtoId, event) {
+  if (event.target.tagName !== 'BUTTON') {
+    window.location.href = `produto.html?id=${produtoId}`;
+  }
+}
+
+/* =========================
    CARREGAR PRODUTOS DA API
 ========================= */
 function loadProdutos() {
@@ -272,6 +314,8 @@ function loadProdutos() {
       produtos.forEach(produto => {
         const produtoDiv = document.createElement('div');
         produtoDiv.className = 'produto produto-venda';
+        produtoDiv.style.cursor = 'pointer';
+        produtoDiv.setAttribute('onclick', `abrirProduto('${produto._id}', event)`);
         produtoDiv.innerHTML = `
           <span class="badge">Oferta</span>
           <h3>${produto.nome}</h3>
@@ -281,12 +325,6 @@ function loadProdutos() {
             <button class="btn btn-buy" onclick="event.stopPropagation(); comprarAgora('${produto.nome}', ${produto.preco}, '${produto.imagem}')">Comprar agora</button>
           </div>
         `;
-        produtoDiv.style.cursor = 'pointer';
-        produtoDiv.onclick = (e) => {
-          if (e.target.tagName !== 'BUTTON') {
-            window.location.href = `produto.html?id=${produto._id}`;
-          }
-        };
         container.appendChild(produtoDiv);
       });
 
