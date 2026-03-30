@@ -101,9 +101,13 @@ function initScrollReveal() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible")
+        entry.target.classList.remove("hidden")
+      } else {
+        entry.target.classList.remove("visible")
+        entry.target.classList.add("hidden")
       }
     })
-  }, { threshold: 0.25 })
+  }, { threshold: 0.1 })
 
   revealItems.forEach(item => observer.observe(item))
 }
@@ -199,6 +203,15 @@ function comprarSelecionados() {
 
   removerSelecionados()
 }
+
+/* =========================
+   INICIALIZAÇÃO
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  initInfiniteScroll()
+  enableDragScroll()
+  initScrollReveal()
+})
 
 function updateAcoes() {
   const checked = document.querySelectorAll(".item-checkbox:checked")

@@ -247,6 +247,67 @@ section {
 }
 
 /* =========================
+   SCROLL REVEAL ANIMATIONS
+========================= */
+.reveal {
+  opacity: 0;
+  transition: all 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+}
+
+/* Specific animations */
+.slider.reveal {
+  transform: translateY(50px);
+}
+
+.slider.reveal.visible {
+  transform: translateY(0);
+}
+
+.slider.reveal.hidden {
+  transform: translateY(-50px);
+}
+
+.cover-section.reveal {
+  transform: translateX(-50px);
+}
+
+.cover-section.reveal.visible {
+  transform: translateX(0);
+}
+
+.cover-section.reveal.hidden {
+  transform: translateX(50px);
+}
+
+.featured-models.reveal {
+  transform: scale(0.9);
+}
+
+.featured-models.reveal.visible {
+  transform: scale(1);
+}
+
+.featured-models.reveal.hidden {
+  transform: scale(0.9);
+}
+
+.model-section .reveal {
+  transform: translateX(50px);
+}
+
+.model-section .reveal.visible {
+  transform: translateX(0);
+}
+
+.model-section .reveal.hidden {
+  transform: translateX(-50px);
+}
+
+/* =========================
    RESPONSIVO
 ========================= */
 @media (max-width: 900px) {
