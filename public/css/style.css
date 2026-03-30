@@ -11,12 +11,14 @@ body {
    HEADER
 ========================= */
 header {
-  background: black;
+  background: linear-gradient(to bottom, #000 77%, transparent);
   color: white;
-  padding: 15px;
+  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 2;
 }
 .icons-header{
       width: 30px;
