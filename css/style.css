@@ -18,6 +18,15 @@ header {
   justify-content: space-between;
   align-items: center;
 }
+.icons-header{
+      width: 30px;
+    height: auto;
+}
+
+.logo-header{
+      width: 200px;
+    height: auto;
+}
 
 nav a {
   color: white;
