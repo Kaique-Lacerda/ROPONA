@@ -266,9 +266,6 @@ nav a {
   }
 }
 /* =========================
-   COVER SECTION
-========================= */
-/* =========================
    COVER SECTION (UPGRADE)
 ========================= */
 .cover-section {
@@ -360,6 +357,13 @@ nav a {
   z-index: -1;
   filter: blur(40px);
 }
+.moletons-banner{
+  background-color: #000;
+}
+.moletons-banner img{
+  width: 100px;
+}
+
 /* =========================
    FEATURED
 ========================= */
