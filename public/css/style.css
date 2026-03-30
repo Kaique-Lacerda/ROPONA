@@ -2,14 +2,9 @@
    RESET BASE
 ========================= */
 body {
-  background: radial-gradient(circle at top, #1a1a1a, #000);
-  color: white;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f5f5f5;
 }
 
 /* =========================
@@ -557,23 +552,4 @@ section {
   #sidebar {
     width: 100%;
   }
-}
-body::before,
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  width: 80px;
-  height: 100%;
-  pointer-events: none;
-}
-
-body::before {
-  left: 0;
-  background: linear-gradient(to right, rgba(255,255,255,0.05), transparent);
-}
-
-body::after {
-  right: 0;
-  background: linear-gradient(to left, rgba(255,255,255,0.05), transparent);
 }
