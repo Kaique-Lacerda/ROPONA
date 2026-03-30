@@ -231,7 +231,7 @@ function updateAcoes() {
 /* =========================
    CONFIGURAÇÃO API
 ========================= */
-const API_BASE_URL = '';
+const API_BASE_URL = 'https://ropona.vercel.app/api/produtos';
 
 /* =========================
    CARREGAR PRODUTOS DA API

@@ -1,0 +1,16 @@
+{
+  "name": "ropona-oblivionwear",
+  "version": "1.0.0",
+  "description": "Loja OblivionWear com API serverless no Vercel",
+  "type": "module",
+  "scripts": {
+    "dev": "cd backend && npm run dev",
+    "build": "echo 'No build step required for serverless functions'"
+  },
+  "dependencies": {
+    "mongodb": "^6.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
